@@ -1,0 +1,47 @@
+/*
+ *	For pseudo distributed mode
+ */
+
+1. Format the filesystem and start the namenode
+	$ /usr/local/hadoop/sbin/stop-dfs.sh
+	$ /usr/local/hadoop/bin/hdfs namenode -format
+	$ /usr/local/hadoop/sbin/start-dfs.sh
+
+2. Make the HDFS work directory
+	$ /usr/local/hadoop/bin/hdfs dfs -mkdir /user
+	$ /usr/local/hadoop/bin/hdfs dfs -mkdir /user/root
+
+3. Copy input file on HDFS
+	$ /usr/local/hadoop/bin/hdfs dfs -put /opt/hadoop/CS644/hw4/100KWikiText.txt input
+
+4. Run the jar file on hadoop
+	$ /usr/local/hadoop/bin/hadoop jar RelativeFrequencyCalculator.jar RelativeFrequencyCalculator input output
+
+5. Get the output
+	$ /usr/local/hadoop/bin/hdfs dfs -cat output/part-r-00000
+
+
+/*
+ *	For fully distributed mode
+ */
+
+1. Format the filesystem and start the namenode
+	$ /usr/local/hadoop/sbin/stop-dfs.sh
+	$ /usr/local/hadoop/bin/hdfs namenode -format
+	$ /usr/local/hadoop/sbin/start-dfs.sh
+
+2. Make the HDFS work directory
+	$ /usr/local/hadoop/bin/hdfs dfs -mkdir /user
+	$ /usr/local/hadoop/bin/hdfs dfs -mkdir /user/root
+
+3. Start Yarn
+	$ /usr/local/hadoop/sbin/start-yarn.sh
+
+3. Copy input file on HDFS
+	$ /usr/local/hadoop/bin/hdfs dfs -put 100KWikiText.txt input
+
+4. Run the jar file on hadoop
+	$ /usr/local/hadoop/bin/hadoop jar RelativeFrequencyCalculator.jar RelativeFrequencyCalculator input output
+
+5. Get the output
+	$ /usr/local/hadoop/bin/hdfs dfs -cat output/part-r-00000

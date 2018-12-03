@@ -1,0 +1,21 @@
+### Algorithm
+
+We will be using 2 pair of Mapper and Reducer
+
+RFCMapper1:
+	-	Each line is split using the RegEx with blank space and then trimmed.
+	-	Two Adjacent words are taken iteratively and set as keys with default value 1.
+
+NWReducer:
+	-	Combiner is used to group the keys
+
+RFCReducer1:
+	-	Relative frequency for each word is calculated and written in context.
+
+This result is not in decending order of relative frequency, so another pair of Mapper and Reducer is used. tempOutput of RFCReducer1 is sent as input to RFCMapper2.
+
+RFCMapper2:
+	-	Key and values of previous stage are interchanged so that TempComarator class can sort the relative frequency in descending order.
+
+RFCReducer2:
+	-	This will filter out the result with Relative Frequency 1.0 and also lists out only top 100 results.
